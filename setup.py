@@ -29,7 +29,7 @@ class InstallData(_install_data):
                 info('updating icons cache for: %s', theme_dir)
                 subprocess.call(
                     ['gtk-update-icon-cache', '-q', '-f', '-t', theme_dir])
-            except Exception, ex:
+            except Exception as ex:
                 warn('updating icon cache failed: %s', ex)
 
 setup(name='lookit',

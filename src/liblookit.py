@@ -32,12 +32,20 @@ def get_data_dir():
     p = os.path.join(p, 'data')
     return p
 
-def show_notification(title, message):
+def show_notification(title, message, msg=False, duration=False, icon='lookit'):
     try:
-        pynotify.init('Lookit')
-        n = pynotify.Notification(title, message, 'lookit')
-        n.set_hint_string('append', '')
-        n.show()
+        if not msg:
+            pynotify.init('Lookit')
+            msg = pynotify.Notification(title, message, icon)
+        else:
+            msg.update_notification(title, message, icon)
+
+        if duration > 0:
+            msg.set_timeout(duration)
+
+        msg.set_hint_string('append', '')
+        msg.show()
+        return n
     except Exception as e:
         print 'An error occurred trying to show notifications:'
         print e

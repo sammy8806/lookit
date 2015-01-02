@@ -17,10 +17,11 @@
 # Place, Suite 330, Boston, MA  02111-1307  USA
 
 import argparse
-import gtk
 import os
 import sys
 import time
+
+from gi.repository import GLib, GObject, Pango, GdkPixbuf, Gtk, Gio
 
 try:
     # Try to import these from current directory, in case running from src
@@ -60,7 +61,7 @@ if __name__ == '__main__':
     liblookit.migrate_from_1_0()
 
     if args.version:
-        print 'Lookit', liblookit.VERSION_STR
+        print ('Lookit %s') % liblookit.VERSION_STR
         sys.exit(0)
 
     if args.image:
@@ -87,5 +88,5 @@ if __name__ == '__main__':
             indicator = lookitindicator.LookitIndicator()
             gtk.main()
         else:
-            print 'AppIndicator support not available'
+            print ('AppIndicator support not available')
 

@@ -10,6 +10,28 @@ sudo apt-get update
 sudo apt-get install lookit
 ```
 
+## On Arch
+Install the following Packages:
+- extra/python2-notify
+- extra/python2-gconf
+- aur/python2-keyring
+- extra/python2-xdg
+- aur/libappindicator
+
+## python3
+- keybinder
+- pygtk
+
+
+### SFTP/SSH
+- community/python2-paramiko
+
+### HTTP
+- extra/python2-pycurl
+
+For xfce4 you additionally need:
+- extra/xfce4-notifyd
+
 ## From source:
 
 Source tarballs are available on the [download page](http://github.com/zachtib/lookit/downloads).

@@ -133,4 +133,4 @@ class Selector:
 
 if __name__ == '__main__':
     # For testing purposes only
-    print Selector().get_selection()
+    print (Selector().get_selection())

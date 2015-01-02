@@ -1,9 +1,10 @@
-import gtk
 import os
 import sys
 
 import liblookit
 import lookitconfig
+
+from gi.repository import GLib, GObject, Pango, GdkPixbuf, Gtk, Gio
 
 from uploader import PROTO_LIST as CONNECTION_TYPES
 
@@ -34,7 +35,7 @@ class PreferencesDialog:
             xmlfile = os.path.join(datadir, 'preferences.xml')
             self.builder.add_from_file(xmlfile)
         except Exception as e:
-            print e
+            print (e)
             sys.exit(1)
 
         connections = gtk.ListStore(str)
@@ -89,10 +90,10 @@ class PreferencesDialog:
                 self.builder.get_object(field).set_sensitive(True)
             for field in server_port_dir_url:
                 self.builder.get_object(field).set_sensitive(False)
-	elif proto in ['HTTP']:
-		for field in all_fields:
-			self.builder.get_object(field).set_sensitive(False)
-		self.builder.get_object('url').set_sensitive(True)
+        elif proto in ['HTTP']:
+            for field in all_fields:
+                self.builder.get_object(field).set_sensitive(False)
+            self.builder.get_object('url').set_sensitive(True)
         else:
             for field in all_fields:
                 self.builder.get_object(field).set_sensitive(False)
@@ -102,8 +103,8 @@ class PreferencesDialog:
         elif proto == 'SSH':
             self.builder.get_object('ssh_key_file').set_sensitive(True)
             self.builder.get_object('port').set_value(22)
-	elif proto == 'HTTP':
-	    self.builder.get_object('port').set_value(80)
+        elif proto == 'HTTP':
+            self.builder.get_object('port').set_value(80)
 
     def on_dialog_response(self, widget, data=None):
         if data != 1:

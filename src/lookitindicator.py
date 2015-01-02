@@ -142,7 +142,7 @@ class LookitIndicator:
         elif command == cmd.TOGGLE_UPLOAD:
             self.set_upload(widget.get_active())
         else:
-            print 'Error: reached end of handle_menu_item'
+            print ('Error: reached end of handle_menu_item')
 
         if uri is not None:
             self.add_image(uri)

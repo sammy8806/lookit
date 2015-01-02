@@ -2,7 +2,7 @@ import os
 import pycurl
 import xml.parsers.expat
 
-import liblookit
+from lookit import liblookit
 
 IMGUR_ALLOWED = ['JPEG', 'GIF', 'PNG', 'APNG', 'TIFF', 'BMP', 'PDF', 'XCF']
 

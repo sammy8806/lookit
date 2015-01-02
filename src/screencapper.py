@@ -1,7 +1,7 @@
-import gtk
 import time
-
 import lookitconfig
+
+from gi.repository import GLib, GObject, Pango, GdkPixbuf, Gtk, Gio
 
 def capture_screen():
     if lookitconfig.LookitConfig().getint('General', 'delay') == 0:

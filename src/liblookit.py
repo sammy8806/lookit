@@ -1,5 +1,6 @@
 import os
-import pynotify
+from gi.repository import Notify
+#import notify2
 import time
 
 import about
@@ -34,13 +35,13 @@ def get_data_dir():
 
 def show_notification(title, message):
     try:
-        pynotify.init('Lookit')
-        n = pynotify.Notification(title, message, 'lookit')
+        notify2.init('Lookit')
+        n = notify2.Notification(title, message, 'lookit')
         n.set_hint_string('append', '')
         n.show()
     except Exception as e:
-        print 'An error occurred trying to show notifications:'
-        print e
+        print ('An error occurred trying to show notifications:')
+        print (e)
 
 def migrate_from_1_0():
     old_config = os.path.expanduser('~/.config/lookit.conf')

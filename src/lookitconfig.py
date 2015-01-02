@@ -1,4 +1,4 @@
-from ConfigParser import RawConfigParser, NoSectionError, NoOptionError
+import configparser
 import gconf
 import keyring
 import os

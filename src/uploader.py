@@ -16,26 +16,26 @@ try:
 	import ftplib
 	PROTO_LIST.append('FTP')
 except ImportError:
-	print 'FTP support not found'
+	print ('FTP support not found')
 
 try:
 	import paramiko
 	PROTO_LIST.append('SSH')
 except ImportError:
-	print 'SFTP support not found'
+	print ('SFTP support not found')
 
 try:
 	import ubuntuone
 	import ubuntuone.storageprotocol
 	# PROTO_LIST.append('Ubuntu One') # Not yet supported
 except ImportError:
-	print 'Ubuntu One support not found'
+	print ('Ubuntu One support not found')
 
 try:
     import imgur
     PROTO_LIST.append('Imgur')
 except ImportError:
-    print 'Imgur support not available'
+    print ('Imgur support not available')
 
 try:
 	import pycurl
@@ -43,17 +43,17 @@ try:
 	PROTO_LIST.append('Omploader')
 	PROTO_LIST.append('HTTP')
 except ImportError:
-	print 'Omploader support not available'
-	print 'HTTP support not available'
+	print ('Omploader support not available')
+	print ('HTTP support not available')
 
 try:
     import cloud
     if cloud.POSTER and cloud.ORDERED_DICT:
         PROTO_LIST.append('CloudApp')
     else:
-        print 'CloudApp support not available'
+        print ('CloudApp support not available')
 except ImportError:
-    print 'CloudApp support not available'
+    print ('CloudApp support not available')
 
 import liblookit
 import lookitconfig
@@ -93,6 +93,7 @@ class HTTPUploader:
 		c.setopt(c.URL, url)
 		c.setopt(c.HTTPPOST, values)
 		c.setopt(c.WRITEFUNCTION, self.curl_response)
+        c.setopt(c.USERAGENT, 'Lookit v1.2');
 
 		try:
 			c.perform()
@@ -165,7 +166,7 @@ def upload_file_sftp(f, hostname, port, username, password, ssh_key_file, direct
 
 def upload_file_omploader(f):
 	if not 'Omploader' in PROTO_LIST:
-		print 'Error: Omploader not supported'
+		print ('Error: Omploader not supported')
 	i = OmploaderUploader()
 	i.upload(f)
 	if not 'error_msg' in i.mapping:
@@ -175,7 +176,7 @@ def upload_file_omploader(f):
 
 def upload_file_imgur(f):
 	if not 'Imgur' in PROTO_LIST:
-		print 'Error: Imgur not supported'
+		print ('Error: Imgur not supported')
 	i = imgur.ImgurUploader()
 	i.upload(f)
 	if not 'error_msg' in i.mapping:
@@ -185,7 +186,7 @@ def upload_file_imgur(f):
 
 def upload_file_cloud(f, username, password):
     if not 'CloudApp' in PROTO_LIST:
-        print 'Error: CloudApp not supported'
+        print ('Error: CloudApp not supported')
     try:
         mycloud = cloud.Cloud()
         mycloud.auth(username, password)
@@ -225,7 +226,7 @@ def upload_file(image, existing_file=False):
                     config.get('Upload', 'url'),
                     )
     elif proto == 'HTTP':
-	success, data = upload_file_http(image, config.get('Upload', 'URL'))
+        success, data = upload_file_http(image, config.get('Upload', 'URL'))
     elif proto == 'FTP':
         success, data = upload_file_ftp(image,
                     config.get('Upload', 'hostname'),
@@ -240,7 +241,7 @@ def upload_file(image, existing_file=False):
         try:
             f = open(liblookit.LOG_FILE, 'ab')
             f.write(time.ctime() + ' Uploaded screenshot to Omploader: ' + data['original_image'] + '\n')
-        except IOError, e:
+        except IOError as e:
             pass
         finally:
             f.close()
@@ -251,7 +252,7 @@ def upload_file(image, existing_file=False):
         try:
             f = open(liblookit.LOG_FILE, 'ab')
             f.write(time.ctime() + ' Uploaded screenshot to Imgur: ' + data['original_image'] + '\n')
-        except IOError, e:
+        except IOError as e:
             pass
         finally:
             f.close()
@@ -292,7 +293,7 @@ def upload_file(image, existing_file=False):
                 shutil.move(image, destination)
                 image = destination
             except IOError:
-                print 'Error moving file'
+                print ('Error moving file')
 
     clipboard = gtk.clipboard_get()
     clipboard.set_text(url)
